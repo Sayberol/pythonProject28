@@ -5,7 +5,7 @@ from models import Genre, GenreSchema
 genre_ns = Namespace('Genres')
 
 
-@Genre_ns.route('/')
+@genre_ns.route('/')
 class GenresView(Resource):
     def get(self):
         rs = db.session.query(Genre).all()
@@ -13,7 +13,7 @@ class GenresView(Resource):
         return res, 200
 
 
-@Genre_ns.route('/<int:gid>')
+@genre_ns.route('/<int:gid>')
 class GenreView(Resource):
     def get(self, gid):
         g = db.session.query(Genre).get(gid)

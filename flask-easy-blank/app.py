@@ -5,7 +5,7 @@ from config import Config
 from models import Movie, Director, Genre
 from setup_db import db
 from views.movies import movie_ns
-import data
+from data import data
 
 
 def create_app(config_object):
@@ -40,21 +40,23 @@ def create_data(app, db):
                 director_id=movie["director_id"],
             )
             with db.session.begin():
-                db.session.add_all(m)
-        for director in data["director"]:
+                db.session.add(m)
+
+        for director in data["directors"]:
             d = Director(
                 id=director["pk"],
                 name=director["name"],
             )
             with db.session.begin():
-                db.session.add_all(d)
-        for genre in data["genre"]:
+                db.session.add(d)
+
+        for genre in data["genres"]:
             g = Genre(
                 id=genre["pk"],
                 name=genre["name"],
             )
             with db.session.begin():
-                db.session.add_all(g)
+                db.session.add(g)
 
 
 app = create_app(Config())
